@@ -4,13 +4,14 @@ pipeline {
     stages {
         stage('Build Docker image') {
             steps {
-                sh 'sudo docker build -t docker-getting-started .'
+                sh 'sudo chmod 666 /var/run/docker.sock'
+                sh 'docker build -t docker-getting-started .'
             }
         }
 
         stage('Run Docker Container') {
             steps {
-                sh 'sudo docker run -dp 3000:3000 docker-getting-started'
+                sh 'docker run -dp 3000:3000 docker-getting-started'
             }
           }
     }
